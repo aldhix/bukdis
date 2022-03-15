@@ -1,0 +1,77 @@
+.nav-username .dropdown-menu{
+    font-size: 0.9rem;
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+.nav-username .dropdown-divider {
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+
+/* Triangle menu dropdown */
+.nav-username .dropdown-menu::before {
+    border-bottom: 9px solid rgba(0, 0, 0, 0.3);
+    border-left: 9px solid rgba(0, 0, 0, 0);
+    border-right: 9px solid rgba(0, 0, 0, 0);
+    content: "";
+    display: inline-block;
+    right: 10px;
+    position: absolute;
+    top: -8px;
+}
+
+.nav-username .dropdown-menu::after {
+    border-bottom: 8px solid #FFFFFF;
+    border-left: 9px solid rgba(0, 0, 0, 0);
+    border-right: 9px solid rgba(0, 0, 0, 0);
+    content: "";
+    display: inline-block;
+    right: 10px;
+    position: absolute;
+    top: -7px;
+}
+
+.nav-username .fa-caret-down{
+    font-size: 0.75rem;
+}
+
+.icon-user {
+    font-size: 2rem;
+}
+
+.user-panel .info a{
+    vertical-align: middle;
+}
+
+.form-group {
+    position: relative;
+}
+
+.btn.btn-primary, .btn.btn-secondary,  .btn.btn-danger, .btn.btn-success {
+    box-shadow: 1px 2px 3px #6c757d;
+}
+
+.btn-zoom-foto{
+    position: absolute;
+}
+.table-biodata td{
+    vertical-align: top;
+    padding: 5px;
+}
+
+.error-all{
+    font-size: 0.7rem;
+}
+
+ul.error-all{
+    float: left;
+    margin: 0;
+    padding: 0;
+    list-style-type: none; /* Remove bullets */
+}
+
+ul.error-all li{
+    float: left;
+    padding: 0;
+    margin: 0;
+}

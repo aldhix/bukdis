@@ -1,0 +1,118 @@
+@startuml Bukin
+
+class User{
+    + id : bigInt
+    + username : char
+    - password : string
+    + nama_lengkap_user : char
+    + nip : char
+    + role : enum
+    + rememberToken()
+    + timestamps()
+}
+
+class TahunAjaran{
+    + id : bigInt
+    + tahun : int
+    + tahun_ajaran : char
+    + timestamps : false
+}
+
+class Proli{
+    + id : bigInt
+    + kode_proli : char
+    + nama_proli : char
+    + timestamps : false
+}
+
+class Kelas{
+    + id : bigInt
+    + proli_id : bigInt
+    + user_id : bigInt
+    + nama_kelas : char
+    + timestamps : false
+}
+
+class Siswa{
+    + id : bigInt
+    + kelas_id  : bigInt
+    + tahun_pelajaran_id : bigInt
+    + nama_lengkap_siswa : char
+    + nis : string
+    - password : string
+    + foto : string
+    + gender : enum
+    + tempat_lahir : char
+    + tgl_lahir : char
+    + status : enum
+    + rememberToken()
+    + timestamps()
+}
+
+Class SiswaDetail{
+    + id : bigInt
+    + siswa_id : bigInt
+    + nisn : char
+    + nama_panggilan : char
+    + anak_ke : tinyInt
+    + jum_saudara : tinyInt
+    + agama : enum
+    + gol_darah : char
+    + bahasa : char
+    + negara : char
+    + alamat : string
+    + no_hp : char
+    + tinggal_dg : char
+    + alasan_tidak_tinggal : string
+    + lingkungan : char
+    + timestamps : false
+}
+
+
+Class SiswaOrtu {
+    + id : bigInt
+    + type_ortu : enum
+    + siswa_id : bigInt
+    + nama_lengkap_ortu : char
+    + foto_ortu : string
+    + tempat_lahir_ortu : char
+    + tgl_lahir_ortu : char
+    + agama_ortu : char
+    + alamat_ortu : char
+    + no_hp_ortu : char
+    + pend_akhir_ortu : char
+    + pekerjaan_ortu : char
+    + alamat_pekerjaan_ortu : char
+    + timestamps : false
+}
+
+
+Class SiswaFile{
+    + id : bigInt
+    + siswa_id : bigInt
+    + file_kk : string
+    + file_ijazah_smp : string
+    + file_akta_lahir : string
+    + timestamps : false
+}
+
+Class SiswaKelas{
+    + id : bigInt
+    + siswa_id : bigInt
+    + tahun_ajaran_id : bigInt
+    + kelas_id  : bigInt
+   + timestamps : false
+}
+
+Proli "1" o--- "n" Kelas
+TahunAjaran "1" *--- "n" SiswaKelas
+Kelas "1" *--- "n" SiswaKelas
+Kelas "1" o--- "n" Siswa
+User "1" o--- "n" Kelas
+Siswa "1" *--- "n" SiswaKelas
+Siswa "1" *--- "1" SiswaDetail
+Siswa "1" *--- "1" SiswaOrtu
+Siswa "1" *--- "1" SiswaFile
+Siswa "1" *--- "1" TahunAjaran
+
+@enduml
