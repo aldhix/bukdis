@@ -1,0 +1,7 @@
+@startuml Bukdis V.2
+
+class User {
+    + id : int
+}
+
+@enduml
