@@ -1,7 +1,11 @@
 @startuml Bukdis V.2
 
 class User {
-    + id : int
+    + id : bigInt
+    + nama_lengkap : char
+    + username : char
+    + password : string
+    + email : string
 }
 
 @enduml
