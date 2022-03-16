@@ -2,10 +2,156 @@
 
 class User {
     + id : bigInt
-    + nama_lengkap : char
+    + nama_lengkap_user : char
     + username : char
     + password : string
     + email : string
+    + role : enum
+    + timestamps()
 }
+
+class Siswa{
+    + id : bigInt
+    + nama_lengkap_siswa : char
+    + kelas_id : int
+    + nis : char
+    + nisn : char
+    + password : string
+    + kelamin : enum
+    + status_siswa : enum
+    + timestamps()
+}
+
+class DataSiswa {
+    + id : bigInt
+    + siswa_id : bigInt
+    + foto_siswa : string
+    + nama_panggilan : char
+    + tempat_lahir_siswa : char
+    + tgl_lahir_siswa : date
+    + anak_ke : int
+    + jml_saudara : int
+    + agama_siswa : string
+    + gol_darah : char
+    + bahasa : char
+    + kewarganegaraan : char
+    + alamat_siswa : char
+    + no_tlp_siswa : char
+    + tinggal_dengan : string
+    + alasan_tidak_tinggal_ortu : string
+    + situasi_lingkungan : string
+}
+
+class BerkasSiswa {
+    + id : bigInt
+    + siswa_id : bigInt
+    + file_ijazah_smp : string
+    + file_akta_lahir : string
+    + file_kk : string
+    + file_ktp_ortu : string
+    + file_ktp_wali : string
+}
+
+class DataAyah {
+    + id : bigInt
+    + siswa_id : bigInt
+    + nama_lengkap_ayah : char
+    + tempat_lahir_ayah : char
+    + tgl_lahir_ayah : date
+    + agama_ayah : string
+    + alamat_ayah : string
+    + pendidikan_ayah : string
+    + pekerjaan_ayah : string
+    + no_tlp_ayah : char
+}
+
+class DataIbu {
+    + id : bigInt
+    + siswa_id : bigInt
+    + nama_lengkap_ibu : char
+    + tempat_lahir_ibu : char
+    + tgl_lahir_ibu : date
+    + agama_ibu : string
+    + alamat_ibu : string
+    + pendidikan_ibu : string
+    + pekerjaan_ibu : string
+    + no_tlp_ibu : char
+}
+
+class DataWali {
+    + id : bigInt
+    + siswa_id : bigInt
+    + nama_lengkap_wali : char
+    + tempat_lahir_wali : char
+    + tgl_lahir_wali : date
+    + agama_wali : string
+    + alamat_wali : string
+    + pendidikan_wali : string
+    + pekerjaan_wali : string
+    + no_tlp_wali : char
+}
+
+class Program{
+    + id : int
+    + program : char
+}
+
+class Kelas{
+    + id : int
+    + program_id : int
+    + kelas : char
+    + user_id : bigInt
+}
+
+class TahunAjaran {
+    + id : bigInt
+    + tahun_ajaran : char 
+    + tahun_awal : int
+}
+
+class Rombel {
+    + id : bigInt
+    + kelas_id : int
+    + siswa_id : int
+    + tahun_ajaran_id : int
+}
+
+Class SiswaKeluar {
+    + id : bigInt
+    + siswa_id : bigInt
+    + kelas_id : int
+    + tahun_ajaran_id : int
+    + keterangan : string
+    + file_surat_keluar : string
+    + timestamps()
+}
+
+User "1" o-- "1" Kelas
+Program "1" *-- "n" Kelas
+
+Kelas "1" o-- "1" Siswa
+Kelas "1" *-- "n" Rombel
+
+TahunAjaran "1" *-- "n" Rombel
+
+Siswa "1" *-- "1" DataSiswa
+Siswa "1" *-- "1" BerkasSiswa
+Siswa "1" *-- "1" DataAyah
+Siswa "1" *-- "1" DataIbu
+Siswa "1" *-- "1" DataWali
+Siswa "1" *-- "n" Rombel
+
+Siswa "1" *-- "1" SiswaKeluar
+Kelas "1" *-- "n" SiswaKeluar
+TahunAjaran "1" *-- "n" SiswaKeluar
+
+note bottom of User 
+<b>role</b> [ admin,operator,guru ]
+end note
+
+note top of Siswa 
+<b>kelamin</b> [ L,P ]
+<b>status_siswa</b> [ aktif, alumni, keluar ]
+end note
 
 @enduml
