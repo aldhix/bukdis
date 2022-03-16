@@ -3,25 +3,25 @@
 entity user {
     * **id : bigInt <<PK>>**
     --
-    nama_lengkap_user : char{100}
+    nama_user : char{100}
     username : char{100} 
     password : string
-    email : string
+    email : string unique
     role : enum [ admin, operator, guru ]
     created_at : dateTime
     updated_at : dateTime
 }
 
-entity program{
+entity program_keahlian{
     * **id : int <<PK>>**
     --
-    program : char{200}
+    program_keahlian : char{200}
 }
 
 entity kelas{
     * **id : int <<PK>>**
     --
-    *program_id : int <<FK>>
+    *program_keahlian_id : int <<FK>>
     *user_id : bigInt <<FK>>
     kelas : char{12}
     
@@ -38,9 +38,9 @@ entity siswa{
     * ** id : bigInt <<PK>> **
     --
     *kelas_id : int <<FK>>
-    nama_lengkap_siswa : char
-    nis : char{12}
-    nisn : char{12} null
+    nama_siswa : char
+    nis : char{12} unique
+    nisn : char{12} unique null
     password : string
     kelamin : enum [P, L]
     status_siswa : enum[aktif, alumni, keluar]
@@ -106,7 +106,7 @@ entity data_ayah {
     --
     *siswa_id : bigInt <<FK>>
     foto_ayah : string null
-    nama_lengkap_ayah : char{100} null
+    nama_ayah : char{100} null
     tempat_lahir_ayah : char{100} null
     tgl_lahir_ayah : date null
     agama_ayah : char{50} null
@@ -122,7 +122,7 @@ entity data_ibu {
     --
     *siswa_id : bigInt <<FK>>
     foto_ibu : string null
-    nama_lengkap_ibu : char{100} null
+    nama_ibu : char{100} null
     tempat_lahir_ibu : char{100} null
     tgl_lahir_ibu : date null
     agama_ibu : char{50} null
@@ -138,7 +138,7 @@ entity data_wali {
     --
     *siswa_id : bigInt <<FK>>
     foto_wali : string null
-    nama_lengkap_ibu : char{100} null
+    nama_ibu : char{100} null
     tempat_lahir_ibu : char{100} null
     tgl_lahir_ibu : date null
     agama_ibu : char{50} null
@@ -150,8 +150,8 @@ entity data_wali {
 }
 
 user ||--o| kelas
-program ||--|{ kelas
-kelas ||--o| siswa
+program_keahlian ||--|{ kelas
+kelas ||--o{ siswa
 
 kelas ||--|{ rombel
 tahun_ajaran ||--|{ rombel

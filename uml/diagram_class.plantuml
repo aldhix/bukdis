@@ -2,7 +2,7 @@
 
 class User {
     + id : bigInt
-    + nama_lengkap_user : char
+    + nama_user : char
     + username : char
     + password : string
     + email : string
@@ -10,9 +10,9 @@ class User {
     + timestamps()
 }
 
-class Program{
+class ProgramKeahlian{
     + id : int
-    + program : char
+    + program_keahlian : char
 }
 
 class Kelas{
@@ -30,7 +30,7 @@ class TahunAjaran {
 
 class Siswa{
     + id : bigInt
-    + nama_lengkap_siswa : char
+    + nama_siswa : char
     + kelas_id : int
     + nis : char
     + nisn : char
@@ -92,7 +92,7 @@ class DataAyah {
     + id : bigInt
     + siswa_id : bigInt
     + foto_ayah : string
-    + nama_lengkap_ayah : char
+    + nama_ayah : char
     + tempat_lahir_ayah : char
     + tgl_lahir_ayah : date
     + agama_ayah : string
@@ -107,7 +107,7 @@ class DataIbu {
     + id : bigInt
     + siswa_id : bigInt
     + foto_ibu : string
-    + nama_lengkap_ibu : char
+    + nama_ibu : char
     + tempat_lahir_ibu : char
     + tgl_lahir_ibu : date
     + agama_ibu : string
@@ -122,7 +122,7 @@ class DataWali {
     + id : bigInt
     + siswa_id : bigInt
     + foto_wali : string
-    + nama_lengkap_wali : char
+    + nama_wali : char
     + tempat_lahir_wali : char
     + tgl_lahir_wali : date
     + agama_wali : string
@@ -135,9 +135,9 @@ class DataWali {
 
 
 User "1" o-- "1" Kelas
-Program "1" *-- "n" Kelas
+ProgramKeahlian "1" *-- "n" Kelas
 
-Kelas "1" o-- "1" Siswa
+Kelas "1" o-- "n" Siswa
 Kelas "1" *-- "n" Rombel
 
 TahunAjaran "1" *-- "n" Rombel

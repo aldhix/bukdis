@@ -1,0 +1,36 @@
+@startuml Login
+partition User/Siswa {
+    (*) --> "Akses Login"
+}
+
+partition LoginController {
+    "Akses Login" --> [GET] === VIEW_LOGIN === 
+    --> "Page Login"
+}
+
+partition User/Siswa {
+    "Page Login" --> "Input NIS / Username & Password"
+}
+
+partition LoginController {
+    "Input NIS / Username & Password" --> [POST] if "Validasi" then
+        --> [true] if "Auth Attempt Siswa" then
+        --> [true] "Page Dashboard Siswa"
+        --> === END ===
+        else 
+        --> [false] if "Auth Attempt User" then 
+            -->[true] "Page Dashboard User"
+            --> === END ===
+            else
+            -->[false] "Message Fail Auth" 
+            "Message Fail Auth" --> === VIEW_LOGIN ===  
+            endif
+        endif
+    else 
+    --> [false] "Message Fail Validasi" 
+    "Message Fail Validasi" --> === VIEW_LOGIN ===  
+    endif
+
+    === END === --> (*)
+}
+@enduml
