@@ -1,0 +1,169 @@
+@startuml Database Bukdis V.2
+
+entity user {
+    * **id : bigInt <<PK>>**
+    --
+    nama_lengkap_user : char{100}
+    username : char{100} 
+    password : string
+    email : string
+    role : enum [ admin, operator, guru ]
+    created_at : dateTime
+    updated_at : dateTime
+}
+
+entity program{
+    * **id : int <<PK>>**
+    --
+    program : char{200}
+}
+
+entity kelas{
+    * **id : int <<PK>>**
+    --
+    *program_id : int <<FK>>
+    *user_id : bigInt <<FK>>
+    kelas : char{12}
+    
+}
+
+entity tahun_ajaran {
+    * ** id : int <<PK>> **
+    --
+    tahun_ajaran : char{9} 
+    tahun_awal : tinyInt{4}
+}
+
+entity siswa{
+    * ** id : bigInt <<PK>> **
+    --
+    *kelas_id : int <<FK>>
+    nama_lengkap_siswa : char
+    nis : char{12}
+    nisn : char{12} null
+    password : string
+    kelamin : enum [P, L]
+    status_siswa : enum[aktif, alumni, keluar]
+    created_at : dateTime
+    updated_at : dateTime
+}
+
+entity rombel {
+    * **id : bigInt <<PK>>**
+    --
+    * kelas_id : int <<FK>>
+    * siswa_id : bigInt <<FK>>
+    * tahun_ajaran_id : int <<FK>>
+}
+
+entity siswa_keluar {
+    * **id : bigInt <<PK>>**
+    --
+    * siswa_id : bigInt <<FK>>
+    * kelas_id : int <<FK>>
+    * tahun_ajaran_id : int <<FK>>
+    no_surat_keluar : char{100}
+    keterangan : string
+    file_surat_keluar : string
+    created_at : dateTime
+    updated_at : dateTime
+}
+
+entity data_siswa {
+    * ** id : bigInt <<PK>>**
+    --
+    * siswa_id : bigInt <<FK>>
+    foto_siswa : string null
+    nama_panggilan : char{100} null
+    tempat_lahir_siswa : char{100} null
+    tgl_lahir_siswa : date null
+    anak_ke : tinyInt{2} null
+    jml_saudara : tinyInt{2} null
+    agama_siswa : char{50} null
+    gol_darah : char{2} null
+    bahasa : char{100} null
+    kewarganegaraan : char{100} null
+    alamat_siswa : string null
+    no_tlp_siswa : char{15} null
+    tinggal_dengan : string null
+    alasan_tidak_tinggal_ortu : string null
+    situasi_lingkungan : string null
+}
+
+entity berkas_siswa {
+    * **id : bigInt <<PK>>**
+    --
+    *siswa_id : bigInt <<FK>>
+    file_ijazah_smp : string null
+    file_akta_lahir : string null
+    file_kk : string null
+    file_ktp_ortu : string null
+    file_ktp_wali : string null
+}
+
+entity data_ayah {
+    * **id : bigInt <<PK>>**
+    --
+    *siswa_id : bigInt <<FK>>
+    foto_ayah : string null
+    nama_lengkap_ayah : char{100} null
+    tempat_lahir_ayah : char{100} null
+    tgl_lahir_ayah : date null
+    agama_ayah : char{50} null
+    alamat_ayah : string null
+    pendidikan_ayah : char{100} null
+    pekerjaan_ayah : char{100} null
+    alamat_pekerjaan_ayah : string null
+    no_tlp_ayah : char{15} null
+}
+
+entity data_ibu {
+    * **id : bigInt <<PK>>**
+    --
+    *siswa_id : bigInt <<FK>>
+    foto_ibu : string null
+    nama_lengkap_ibu : char{100} null
+    tempat_lahir_ibu : char{100} null
+    tgl_lahir_ibu : date null
+    agama_ibu : char{50} null
+    alamat_ibu : string null
+    pendidikan_ibu : char{100} null
+    pekerjaan_ibu : char{100} null
+    alamat_pekerjaan_ibu : string null
+    no_tlp_ibu : char{15} null
+}
+
+entity data_wali {
+    * **id : bigInt <<PK>>**
+    --
+    *siswa_id : bigInt <<FK>>
+    foto_wali : string null
+    nama_lengkap_ibu : char{100} null
+    tempat_lahir_ibu : char{100} null
+    tgl_lahir_ibu : date null
+    agama_ibu : char{50} null
+    alamat_ibu : string null
+    pendidikan_ibu : char{100} null
+    pekerjaan_ibu : char{100} null
+    alamat_pekerjaan_wali : string null
+    no_tlp_ibu : char{15} null
+}
+
+user ||--o| kelas
+program ||--|{ kelas
+kelas ||--o| siswa
+
+kelas ||--|{ rombel
+tahun_ajaran ||--|{ rombel
+siswa ||--|{ rombel
+
+kelas ||--|{ siswa_keluar
+tahun_ajaran ||--|{ siswa_keluar
+siswa ||--|| siswa_keluar
+
+siswa ||--|| data_siswa
+siswa ||--|| berkas_siswa
+siswa ||--|| data_ayah
+siswa ||--|| data_ibu
+siswa ||--|| data_wali
+@enduml
